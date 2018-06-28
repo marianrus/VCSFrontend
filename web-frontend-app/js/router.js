@@ -6,15 +6,16 @@ define([
   'views/home/HomeView',
   'views/projects/ProjectsView',
   'views/contributors/ContributorsView',
+  'views/repositories/RepositoriesView',
   'views/footer/FooterView'
-], function($, _, Backbone, HomeView, ProjectsView, ContributorsView, FooterView) {
+], function($, _, Backbone, HomeView, ProjectsView, ContributorsView, FooterView, RepositoriesView) {
   
   var AppRouter = Backbone.Router.extend({
     routes: {
       // Define some URL routes
       'projects': 'showProjects',
       'users': 'showContributors',
-      
+      'repositories': 'showRepositories',
       // Default
       '*actions': 'defaultAction'
     }
@@ -37,6 +38,14 @@ define([
         // Like above, call render but know that this view has nested sub views which 
         // handle loading and displaying data from the GitHub API  
         var contributorsView = new ContributorsView();
+    });
+
+    app_router.on('route:showRepositories', function () {
+
+        // Like above, call render but know that this view has nested sub views which
+        // handle loading and displaying data from the GitHub API
+        var repositoriesView = new RepositoriesView();
+        repositoriesView.render();
     });
 
     app_router.on('route:defaultAction', function (actions) {
