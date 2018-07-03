@@ -7,7 +7,7 @@ define([
 ], function($, _, Backbone, Router){
   var initialize = function(){
 
-    apiUrl = 'http://localhost:7777';
+    apiUrl = 'http://analitycs-service:7777';
 
     // Pass in our Router module and call it's initialize function
     Router.initialize();
