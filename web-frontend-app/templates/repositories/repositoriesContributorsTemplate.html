@@ -6,16 +6,15 @@
         <table class="table table-striped">
         <thead>
             <tr>
-                <td>Registered repositories: </td>
+                <td>Contributors: </td>
             </tr>
-            <% _.each(repositories, function(repository){ %>
+            <% _.each(contributors, function(contributor){ %>
                 <tr>
-                    <td><a href="#repositories/<%=repository.get('full_name') %>"><%= repository.get("full_name") %></a></td>
+                    <td><%= contributor.get("user_id") %></td>
                 </tr>
             <% }); %>
         </thead>
     </table>
+    </div>
 </div>
-
-
 

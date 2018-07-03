@@ -47,7 +47,6 @@ define([
             var key = $('#searchText').val();
 
             if (key.length >=3) {
-                console.log('search ' + key);
                 this.gitHubSearch.findByName(key);
             }
         },

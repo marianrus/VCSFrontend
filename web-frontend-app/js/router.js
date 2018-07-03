@@ -9,8 +9,23 @@ define([
   'views/repositories/RepositoriesView',
   'views/repositories/repository/RepositoryView',
   'models/repository/RepositoryModel',
-  'views/footer/FooterView'
-], function($, _, Backbone, HomeView, ProjectsView, ContributorsView, RepositoriesView, RepositoryView, RepositoryModel, FooterView) {
+  'views/footer/FooterView',
+  'views/repositories/RepositoryBranchesView',
+  'views/repositories/RepositoriesContributorsView'
+], function(
+    $,
+    _,
+    Backbone,
+    HomeView,
+    ProjectsView,
+    ContributorsView,
+    RepositoriesView,
+    RepositoryView,
+    RepositoryModel,
+    FooterView,
+    RepositoriesBranchesView,
+    RepositoriesContributorsView
+    ) {
   
   var AppRouter = Backbone.Router.extend({
     routes: {
@@ -19,6 +34,8 @@ define([
       'users': 'showContributors',
       'repositories': 'showRepositories',
       'repositories/:owner/:repositoryName': 'showRepository',
+      'repositories-branches/:owner/:repositoryName': 'showRepositoryBranches',
+      'repositories-contributors/:owner/:repositoryName': 'showRepositoryContributors',
       // Default
       '*actions': 'defaultAction'
     }
@@ -47,6 +64,20 @@ define([
         // handle loading and displaying data from the GitHub API
         var repositoriesView = new RepositoriesView();
         // repositoriesView.render();
+    });
+
+    app_router.on('route:showRepositoryBranches', function (owner, repositoryName) {debugger;
+        var fullName =  owner + '/' + repositoryName;
+        new RepositoriesBranchesView( {
+            model: new RepositoryModel({'full_name' : fullName})
+        });
+    });
+
+    app_router.on('route:showRepositoryContributors', function (owner, repositoryName) {debugger;
+        var fullName =  owner + '/' + repositoryName;
+        new RepositoriesContributorsView( {
+            model: new RepositoryModel({'full_name' : fullName})
+        });
     });
     app_router.on('route:showRepository', function (owner, repositoryName) {debugger;
         // Like above, call render but know that this view has nested sub views which

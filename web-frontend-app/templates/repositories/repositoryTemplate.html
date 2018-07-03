@@ -1,13 +1,31 @@
 
 <div class="top">
-    <div>
-        <ul class="nav nav-tabs nav-stacked">
-            <li class="list-group-item">Owner: <%= model.get("owner") %></li>
-            <li class="list-group-item">Name: <%= model.get("name") %></li>
-            <li class="list-group-item">Branches: <%= model.get("branches_count") %></li>
-            <li class="list-group-item">Pulls: <%= model.get("pull_requests_count") %></li>
-            <li class="list-group-item">Tags: <%= model.get("tags_count") %></li>
-            <li class="list-group-item">Contributors: <%= model.get("contributors_count") %></li>
-        </ul>
+    <div class="span6">
+        <table class="table table-striped">
+            <tr>
+                <td>Full name</td>
+                <td><%= model.get("full_name") %></td>
+            </tr>
+            <tr>
+                <td>Name </td>
+                <td><%= model.get("name") %></td>
+            </tr>
+           <tr>
+               <td><a href="#repositories-branches/<%=model.get('full_name') %>">Branches</a></td>
+               <td><%= model.get("branches_count") %></td>
+           </tr>
+            <tr>
+                <td>Pull Requests</td>
+                <td><%= model.get("pull_requests_count") %></td>
+            </tr>
+            <tr>
+                <td>Tags </td>
+                <td><%= model.get("tags_count") %></td>
+            </tr>
+            <tr>
+                <td><a href="#repositories-contributors/<%=model.get('full_name') %>">Contributors</a></td>
+                <td> <%= model.get("contributors_count") %></td>
+            </tr>
+        </table>
     </div>
 </div>

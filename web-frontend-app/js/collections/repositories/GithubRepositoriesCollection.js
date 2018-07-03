@@ -1,43 +1,43 @@
 define([
-  'underscore',
-  'backbone',
-  'models/repository/GitHubRepositoryModel',
-  'text!templates/repositories/githubRepositoriesListTemplate.html'
-], function(_, Backbone, RepositoryModel, githubRepositoriesListTemplate){
+    'underscore',
+    'backbone',
+    'models/repository/GitHubRepositoryModel',
+    'text!templates/repositories/githubRepositoriesListTemplate.html'
+], function (_, Backbone, RepositoryModel, githubRepositoriesListTemplate) {
 
-  var GitHubRepositoriesCollection = Backbone.Collection.extend({
+    var GitHubRepositoriesCollection = Backbone.Collection.extend({
 
-      el: "#github-repos",
+        el: "#github-repos",
 
-      model: RepositoryModel,
+        model: RepositoryModel,
 
-      initialize : function(models, options) {},
+        initialize: function (models, options) {
+        },
 
-      url : function() {
-          return 'https://api.github.com/search/repositories?q=';
-      },
+        url: function () {
+            return 'https://api.github.com/search/repositories?q=';
+        },
 
-     findByName(name){
-          debugger;
+        findByName(name) {
+            var url = this.url() + name;
+            $.ajax({
+                url: url,
+                headers: {
+                    "Authorization":  btoa("t2a-project:licenta2017")
+                },
+                dataType: "json",
+                success: function (data) {
+                    $('#github-repos').html(_.template(githubRepositoriesListTemplate, {'repositories': data.items}));
+                }
+            });
+        },
 
-          var that = this;
-          var url = this.url() + name;
-         $.ajax({
-             url:url,
-             dataType:"json",
-             success:function (data) {
-                 // that.render();
-                 $('#github-repos').append(_.template(githubRepositoriesListTemplate, {'repositories': data.items}));
-             }
-         });
-     },
+        render: function () {
+            debugger;
+            this.el.append(_.template(githubRepositoriesListTemplate, {'repositories': data.items}));
+        }
+    });
 
-     render: function(){
-          debugger;
-         this.el.append(_.template(githubRepositoriesListTemplate, {'repositories': data.items}));
-     }
-  });
-
-  return GitHubRepositoriesCollection;
+    return GitHubRepositoriesCollection;
 
 });

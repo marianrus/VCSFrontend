@@ -1,0 +1,22 @@
+<div class="top">
+  <div id="register-repository">
+
+  </div>
+    <div class="span6">
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Commits: </td>
+            </tr>
+            <% _.each(repositories, function(repository){ %>
+                <tr>
+                    <td><%= repository.get("name") %></td>
+                    <td><%= repository.get("commit_sha") %></td>
+                </tr>
+            <% }); %>
+        </thead>
+    </table>
+</div>
+
+
+
