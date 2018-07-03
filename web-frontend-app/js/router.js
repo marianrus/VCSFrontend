@@ -7,8 +7,10 @@ define([
   'views/projects/ProjectsView',
   'views/contributors/ContributorsView',
   'views/repositories/RepositoriesView',
+  'views/repositories/repository/RepositoryView',
+  'models/repository/RepositoryModel',
   'views/footer/FooterView'
-], function($, _, Backbone, HomeView, ProjectsView, ContributorsView, FooterView, RepositoriesView) {
+], function($, _, Backbone, HomeView, ProjectsView, ContributorsView, RepositoriesView, RepositoryView, RepositoryModel, FooterView) {
   
   var AppRouter = Backbone.Router.extend({
     routes: {
@@ -16,6 +18,7 @@ define([
       'projects': 'showProjects',
       'users': 'showContributors',
       'repositories': 'showRepositories',
+      'repositories/:owner/:repositoryName': 'showRepository',
       // Default
       '*actions': 'defaultAction'
     }
@@ -34,18 +37,27 @@ define([
     });
 
     app_router.on('route:showContributors', function () {
-    
-        // Like above, call render but know that this view has nested sub views which 
+        // Like above, call render but know that this view has nested sub views which
         // handle loading and displaying data from the GitHub API  
         var contributorsView = new ContributorsView();
     });
 
-    app_router.on('route:showRepositories', function () {
-
+    app_router.on('route:showRepositories', function () {debugger;
         // Like above, call render but know that this view has nested sub views which
         // handle loading and displaying data from the GitHub API
         var repositoriesView = new RepositoriesView();
-        repositoriesView.render();
+        // repositoriesView.render();
+    });
+    app_router.on('route:showRepository', function (owner, repositoryName) {debugger;
+        // Like above, call render but know that this view has nested sub views which
+        // handle loading and displaying data from the GitHub API
+        var fullName =  owner + '/' + repositoryName;
+        var repositoriesView = new RepositoryView(
+            {
+                model: new RepositoryModel({'full_name' : fullName})
+            }
+        );
+        // repositoriesView.render();
     });
 
     app_router.on('route:defaultAction', function (actions) {

@@ -1,0 +1,13 @@
+
+<div class="top">
+    <div>
+        <ul class="nav nav-tabs nav-stacked">
+            <li class="list-group-item">Owner: <%= model.get("owner") %></li>
+            <li class="list-group-item">Name: <%= model.get("name") %></li>
+            <li class="list-group-item">Branches: <%= model.get("branches_count") %></li>
+            <li class="list-group-item">Pulls: <%= model.get("pull_requests_count") %></li>
+            <li class="list-group-item">Tags: <%= model.get("tags_count") %></li>
+            <li class="list-group-item">Contributors: <%= model.get("contributors_count") %></li>
+        </ul>
+    </div>
+</div>

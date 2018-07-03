@@ -12,9 +12,11 @@ define([
       
       url : function() {
         return 'https://api.github.com/repos/thomasdavis/backbonetutorials/contributors';
+          // return 'http://ec2-52-59-225-53.eu-central-1.compute.amazonaws.com:7777/analytics/repositories';
       },
     
       parse : function(data) {
+          debugger;
           var uniqueArray = this.removeDuplicates(data.data);
           return uniqueArray;
       },
